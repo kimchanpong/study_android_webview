@@ -1,5 +1,7 @@
 package com.example.webview;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -35,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class WebViewClientClass extends WebViewClient {
+
+        @TargetApi(Build.VERSION_CODES.N)
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            String url = request.getUrl().toString();
             view.loadUrl(url);
             return true;
         }
